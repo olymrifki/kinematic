@@ -1,0 +1,167 @@
+yaw sudut 30 (sudut tengah sudah -45)
+masukkan x : 42
+masukkan y : -85
+masukkan z : 72
+89.8026    -30.4056
+				{-18, 0, 4},       
+lanjut? (1/0)1    
+masukkan x : 92
+masukkan y : -15
+masukkan z : 72
+75.6604    54.4472
+				{-10, 0, 3},       
+lanjut? (1/0)93    
+masukkan x : 92
+masukkan y : -71
+masukkan z : 72
+115.258    14.8492
+				{7, 5, 27},       
+lanjut? (1/0)1
+masukkan x : 33
+masukkan y : -54
+masukkan z : 72
+61.5183    -14.8492
+				{-13, 4, -16},
+lanjut? (1/0)1
+masukkan x : 85
+masukkan y : 15
+masukkan z : 72
+49.4975    70.7107
+				{10, 0, -2},
+lanjut? (1/0)83
+masukkan x : 83
+masukkan y : -41
+masukkan z : 72
+87.6812    29.6985
+				{18, 0, 2},
+lanjut? (1/0)1
+
+
+
+
+sudut yaw 45 (sudut tengah sudah -45)
+masukkan x : 36
+masukkan y : -99
+masukkan z : 72
+95.4594    -44.5477
+				{-25, 1, 14},
+lanjut? (1/0)1
+masukkan x : 98
+masukkan y : -21
+masukkan z : 72
+84.1457    54.4472
+				{-13, 0, 9},
+lanjut? (1/0)1
+masukkan x : 107
+masukkan y : -69
+masukkan z : 72
+124.451    26.8701
+				{12, 11, 44},
+lanjut? (1/0)1
+masukkan x : 19
+masukkan y : -56
+masukkan z : 72
+53.033    -26.163
+				{-26, 6, -18},
+lanjut? (1/0)1
+masukkan x : 80
+masukkan y : 21
+masukkan z : 72
+41.7193    71.4178
+				{14, 0, -4},
+lanjut? (1/0)1
+masukkan x : 90
+masukkan y : -27
+masukkan z : 72
+82.7315    44.5477
+				{28, 0, 4},
+lanjut? (1/0)1
+
+
+
+
+
+sudut yaw 60 (sudah -45)
+masukkan x : 35
+masukkan y : -114
+masukkan z : 72
+105.359    -55.8614
+				{-27, 6, 31},
+lanjut? (1/0)1
+masukkan x : 104
+masukkan y : -26
+masukkan z : 72
+91.9239    55.1543
+				{-15, 2, 16},
+lanjut? (1/0)1
+masukkan x : 
+121
+masukkan y : -64
+masukkan z : 72
+130.815    40.3051
+				{17, 22, 69},
+lanjut? (1/0)1
+masukkan x : 5
+masukkan y : -62
+masukkan z : 72
+47.3762    -40.3051
+				{-40, 4, -16},
+lanjut? (1/0)1
+masukkan x : 74
+masukkan y : 26
+masukkan z : 72
+33.9411    70.7107
+				{19, 0, -7},
+lanjut? (1/0)1
+masukkan x : 91
+masukkan y : -12
+masukkan z : 72
+72.832    55.8614
+				{37, 0, 2},
+lanjut? (1/0)1
+
+
+
+
+
+
+
+
+
+
+sudut yaw 90
+masukkan x : 43
+masukkan y : -143
+masukkan z : 72
+131.522    -70.7107
+{-28, -2147483648, -2147483648},      
+lanjut? (1/0)1
+masukkan x : 119
+masukkan y : -30
+masukkan z : 72
+105.359    62.9325
+{30, 8, 37},
+lanjut? (1/0)14
+masukkan x : 143
+masukkan y : -43
+masukkan z : 72
+131.522    70.7107
+{28, -2147483648, -2147483648},       
+lanjut? (1/0)1
+masukkan x : -17
+masukkan y : -83
+masukkan z : 72
+46.669    -70.7107
+{-56, 0, -3},
+lanjut? (1/0)2
+masukkan x : 59
+masukkan y : 30
+masukkan z : 72
+20.5061    62.9325
+{71, 3, -14},
+lanjut? (1/0)1
+masukkan x : 83
+masukkan y : 17
+masukkan z : 72
+46.669    70.7107
+{56, 0, -3},
