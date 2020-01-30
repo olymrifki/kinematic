@@ -20,3 +20,4 @@ for i in range(langkah+1):
 
 plt.plot(x,y)
 plt.show()
+#aaa
