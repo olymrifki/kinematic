@@ -26,6 +26,8 @@ t11= Symbol('t11')
 t22= Symbol('t22')
 t33 = Symbol('t33')
 
+
+## matriks rotaasi terhadap sumbu x, y, dan z
 X = Matrix([[1, 0, 0],
             [0, cos(t1), -sin(t1)],
             [0, sin(t1), cos(t1)]])
@@ -37,25 +39,28 @@ Z = Matrix([[cos(t1), -sin(t1), 0],
             [0, 0, 1]])
 
 
-
+#vektor, biasanya jarak pusat ke ujung atas kaki
 V = Matrix([x, y, H])
 
+## perbedaan posisi ujung kaki setelah ditransformasi. print aja
 print((X*V).subs([(t1, t11)]) - X*V)
 print((Y*V).subs([(t2, t22)]) - Y*V)
 print((Z*V).subs([(t3, t33)]) - Z*V)
 
-
+##kondisi awal
 sudutlamax = 0
 sudutlamay = 0
 sudutlamaz = 0
 i =0
-##posisi tiap kaki dari tengah
+
+##posisi awal tiap kaki dari tengah. KONSTANTA
 L1 = V.subs([(H, -56), (y, 50), (x, -30)])
 L2 = V.subs([(H, -56), (y, 0), (x, -30)])
 L3 = V.subs([(H, -56), (y, -50), (x, -30)])
 R1 = V.subs([(H, -56), (y, 50), (x, 30)])
 R2 = V.subs([(H, -56), (y, 0), (x, 30)])
 R3 = V.subs([(H, -56), (y, -50), (x, 30)])
+## pada awalnya, perubahan posisi kaki sama dengan posisi awal 
 L11 = V.subs([(H, -56), (y, 50), (x, -30)])
 L22 = V.subs([(H, -56), (y, 0), (x, -30)])
 L33 = V.subs([(H, -56), (y, -50), (x, -30)])
@@ -63,6 +68,7 @@ R11 = V.subs([(H, -56), (y, 50), (x, 30)])
 R22 = V.subs([(H, -56), (y, 0), (x, 30)])
 R33 = V.subs([(H, -56), (y, -50), (x, 30)])
 
+## jarak ujung atas kaki dari lantai
 dL1 = V.subs([(H, 72), (y, -63), (x, 63)])
 dLtengah = V.subs([(H, 72), (y, 0), (x, 89)]) 
 dL3 = V.subs([(H, 72), (y, -63), (x, 63)])
@@ -90,6 +96,9 @@ while i < 18:
 
     if mode == 'x':
         sudutbaru = float(input('sudut akhir: '))
+
+        ## perbedaan jarak ujung atas kaki dengan titik awal setelah dirotasi
+        ## selisih posisi ujung kaki dari tengah dengan posisi awal ujung kaki dari tengah
         deltaL1 = (X*L11).subs([(t1, (sudutbaru)*math.pi/180)])-(L1)
         deltaL2 = (X*L22).subs([(t1, (sudutbaru)*math.pi/180)])-(L2)            
         deltaL3 = (X*L33).subs([(t1, (sudutbaru)*math.pi/180)])-(L3)
@@ -98,14 +107,16 @@ while i < 18:
         deltaR3 = (X*R33).subs([(t1, (sudutbaru)*math.pi/180)])-(R3)
         
     
-                     
+        #### posisi ujung atas kaki dari tengah setelah dirotasi 
+        ## mungkin yang ini bisa pakai sebelum proses di atas
         L11 = (X*L11).subs([(t1, sudutbaru*math.pi/180)])
         L22 = (X*L22).subs([(t1, sudutbaru*math.pi/180)])            
         L33 = (X*L33).subs([(t1, sudutbaru*math.pi/180)])
         R11 = (X*R11).subs([(t1, sudutbaru*math.pi/180)])
         R22 = (X*R22).subs([(t1, sudutbaru*math.pi/180)])
         R33 = (X*R33).subs([(t1, sudutbaru*math.pi/180)])        
-   
+        
+        ## jumlahkan jarak ujung kaki dengan posisi awal dengan jarak awalnya dari lantai
         print('Delta L1 : ')
         print(deltaL1+dL1)
         print('Delta L2 : ')
