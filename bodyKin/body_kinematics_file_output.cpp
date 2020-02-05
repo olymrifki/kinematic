@@ -24,6 +24,9 @@ enum Loc1{
 enum Loc2{
     belakang = -1, tengah, depan
 };
+enum Arah{
+    x, y, z
+};
 
 
 
@@ -55,10 +58,9 @@ class Kaki {
         Servo servoCoxa;
         Servo servoFemur;
         Servo servoTibia;
-        int sudutAwal;
+        int sudutAwal; //sudut awal t1 dalam derajat
         double posisiX, posisiY, posisiZ;
-        Loc1 letak1;
-        Loc2 letak2;
+        
 
         void setPosisiServo() {
             double x, y, z;
@@ -103,11 +105,11 @@ class Kaki {
             } else if (t3 > 3*PI/2) {
                 t3-=2*PI;
             }
-            
+        
             servoCoxa.setSudut(t1);
             servoFemur.setSudut(t2);
             servoTibia.setSudut(t3);
-        } //menset sudut dengan inverseKinematic. digunakan setelah posisi diubah
+        } //menset sudut (dalam radian) dengan inverseKinematic. digunakan setelah posisi diubah
 
         void forwardKinematic() {
             double x, y, z;
@@ -153,6 +155,8 @@ class Kaki {
             cout << int(t1*180/PI) - sudutAwal << ", "<< int(t2*180/PI) << ", " << int(t3*180/PI) << endl;
         } //hanya mencetak sudut-sudut dari posisi dengan persamaan inverseKinematic
     public:
+        Loc1 letak1;
+        Loc2 letak2;
 
         Kaki(int s1, int s2, int s3, int sudut)
             :servoCoxa(s1), servoFemur(s2), servoTibia(s3), sudutAwal(sudut)
@@ -160,7 +164,7 @@ class Kaki {
             posisiX = (C + F)*cos(sudut*PI/180);
             posisiY = (C + F)*sin(sudut*PI/180);
             posisiZ = T;
-            setSudutServo();
+            setSudutServo(); //membuat sudut berdasarkan posisi dan juga membuat sudutnya dalam radian
             switch (sudutAwal)
             {
             case 0:
@@ -214,6 +218,7 @@ class Kaki {
         }
 
         void pindahSudutServoSebesar(int id, double sudut) {
+            sudut = sudut*PI/180;
             if (id == servoCoxa.getId()) {
                 servoCoxa.setSudut((servoCoxa.getSudut()+sudut));
                 setPosisiServo();
@@ -226,8 +231,9 @@ class Kaki {
             }else{
                 cout << "id " << id << " tidak ada di kaki ini" << endl;
             }
-        }
+        }// sudut dalam derajat
         void pindahSudutServoKeSudut(int id, double sudut){
+            sudut = sudut*PI/180;
             if (id == servoCoxa.getId()) {
                 servoCoxa.setSudut((sudut));
                 setPosisiServo();
@@ -240,7 +246,7 @@ class Kaki {
             }else{
                 cout << "id " << id << " tidak ada di kaki ini" << endl;
             }
-        }
+        }// sudut dalam derajat
         void printSudut() {
             cout << "Sudut servo id " << servoCoxa.getId() << ", "<< servoFemur.getId() << ", " << servoTibia.getId() << ": " << endl;
             cout << "   Sebenarnya: ";
@@ -266,32 +272,39 @@ class Robot {
             Kaki(4,5,6, 135),
             Kaki(10,11,12, 180),
             Kaki(16,17,18, -135)};
+        double posisiKaki[6][3];
+        double sudutBadan[3] = {0, 0, 0};
+        double posisiAwalKaki[6][3];
     public:
-        Robot()
-            
-        {
+        Robot(){}
 
+
+        void setup(){
+            for (int i = 0; i<6;i++){
+                    posisiAwalKaki[i][0] = legs[i].letak1*X;
+                    posisiAwalKaki[i][1] = legs[i].letak2*Y;
+                    posisiAwalKaki[i][2] = H;
+
+                    posisiKaki[i][0] = legs[i].letak1*X;
+                    posisiKaki[i][1] = legs[i].letak2*Y;
+                    posisiKaki[i][2] = H;                    
+            }
         }
         void print() {
             for (int i = 0; i < 6; i++){
                 legs[i].printLoc();
             }
         }
-
         void pindah3KakiSebesar(Loc1 letak, double x, double y, double z) {
             int i = 0;
-            if (letak < 0) {
-                i = 1;
-            }
+            if (letak < 0) i = 1;
             for (i; i < 6; i+=2){
                 legs[i].pindahPosisiSejauh(x, y, z);
             }
         }
         void reset3Kaki(Loc1 letak){
             int i = 0;
-            if (letak < 0) {
-                i = 1;
-            }
+            if (letak < 0)  i = 1;
             for (i; i < 6; i+=2){
                 int sudut = legs[i].getSudutAwal();
                 legs[i].pindahKeTitik((C + F)*cos(sudut*PI/180),(C + F)*sin(sudut*PI/180),T);
@@ -303,17 +316,76 @@ class Robot {
                 legs[i].printPosisi();
             }
         }
+        void printSudut(){
+            for (int i = 0; i < 6; i++){
+                legs[i].printSudut();
+            }
+        }
+
+        void rotasiBadanSebesar(Arah arah, double sudut) {
+            double tmp1, tmp2;
+            cout << "ROTASI arah " << arah << " sebesar "<< sudut<< " derajat:" << endl;
+            sudut = sudut*PI/180;
+            int k = arah;
+            int l = (k+1)%3;
+            int m = (k+2)%3;
+            cout << l<< " " << m << endl;
+            for (int i = 0; i < 6; i++){
+                tmp1 = posisiKaki[i][l]*cos(sudut) - posisiKaki[i][m]*sin(sudut);
+                tmp2 = posisiKaki[i][l]*sin(sudut) + posisiKaki[i][m]*cos(sudut);
+                switch (arah){
+                    case x:
+                        legs[i].pindahPosisiSejauh(0, tmp1-posisiKaki[i][1], tmp2-posisiKaki[i][2]); break;
+                    case y :
+                        legs[i].pindahPosisiSejauh(tmp2-posisiKaki[i][0], 0, tmp1-posisiKaki[i][2]); break;                    
+                    case z :
+                        legs[i].pindahPosisiSejauh(tmp1-posisiKaki[i][0], tmp2-posisiKaki[i][1], 0); break;
+                    default:
+                        cout << "arah putar tidak ada" << endl; break;
+                }
+                // tmp1 = posisiKaki[i][l]*cos(sudut) - posisiKaki[i][m]*sin(sudut);
+                // tmp2 = posisiKaki[i][l]*sin(sudut) + posisiKaki[i][m]*cos(sudut);
+                posisiKaki[i][l] = tmp1;
+                posisiKaki[i][m] = tmp2;
+            }
+        }//sudut dalam derajat
 };
 
 int main(){
-    int i;
+    int i, q;
+    char mode;
+    Arah moded;
     Robot KRPAI;
-
+    KRPAI.setup();
     KRPAI.printPosisi();
+    // KRPAI.pindah3KakiSebesar(kanan, 0, 10, -10);
+    // KRPAI.printPosisi();
 
-    KRPAI.pindah3KakiSebesar(kanan, 0, 10, -10);
 
-    KRPAI.printPosisi();
+    // KRPAI.printSudut();
+    // KRPAI.rotasiBadanSebesar(z, 30);
+    // KRPAI.printSudut();
+    
+    for (int i = 0; i < 2; i++) {
+        cin >> mode ;
+        cin >> q ;
+        switch (mode)
+        {
+        case 'x':
+            moded = x;
+            break;
+        case 'y':
+            moded = y;
+            break;
+        case 'z':
+            moded = z;
+            break;
+        default:
+            break;
+        }
+        KRPAI.rotasiBadanSebesar(moded, q);
+        KRPAI.printPosisi();     
+    }
     
     cin >> i;
     return 0;

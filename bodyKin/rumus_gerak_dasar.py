@@ -63,10 +63,10 @@ R11 = V.subs([(H, -56), (y, 50), (x, 30)])
 R22 = V.subs([(H, -56), (y, 0), (x, 30)])
 R33 = V.subs([(H, -56), (y, -50), (x, 30)])
 
-dL1 = V.subs([(H, 72), (y, -63), (x, 63)])
-dLtengah = V.subs([(H, 72), (y, 0), (x, 89)]) 
-dL3 = V.subs([(H, 72), (y, -63), (x, 63)])
-dR1 = V.subs([(H, 72), (y, -63), (x, 63)])
+dL1 = V.subs([(H, 72), (y, 63), (x, -63)])
+dLtengah = V.subs([(H, 72), (y, 0), (x, -89)]) 
+dL3 = V.subs([(H, 72), (y, -63), (x, -63)])
+dR1 = V.subs([(H, 72), (y, 63), (x, 63)])
 dRtengah = V.subs([(H, 72), (y, 0), (x, 89)])
 dR3 = V.subs([(H, 72), (y, -63), (x, 63)])
 
@@ -89,6 +89,8 @@ while i < 18:
     ##4 mode: x(pitch), y(roll), z (yaw), r (reset)
 
     if mode == 'x':
+        
+
         sudutbaru = float(input('sudut akhir: '))
         deltaL1 = (X*L11).subs([(t1, (sudutbaru)*math.pi/180)])-(L1)
         deltaL2 = (X*L22).subs([(t1, (sudutbaru)*math.pi/180)])-(L2)            
@@ -106,21 +108,26 @@ while i < 18:
         R22 = (X*R22).subs([(t1, sudutbaru*math.pi/180)])
         R33 = (X*R33).subs([(t1, sudutbaru*math.pi/180)])        
    
-        print('Delta L1 : ')
-        print(deltaL1+dL1)
-        print('Delta L2 : ')
-        print(deltaL2+dLtengah)
-        print('Delta L3 : ')
-        print(deltaL3+dL3)
         print('Delta R1 : ')
         print(deltaR1+dR1)
         print('Delta R2 : ')
         print(deltaR2+dRtengah)
         print('Delta R3 : ')
         print(deltaR3+dR3)
+        print('Delta L1 : ')
+        print(deltaL1+dL1)
+        print('Delta L2 : ')
+        print(deltaL2+dLtengah)
+        print('Delta L3 : ')
+        print(deltaL3+dL3)
             
     
     if mode == 'y':
+        
+        print((L1))
+        print((Z*L11) )
+
+
         sudutbaru = float(input('sudut akhir: '))
         deltaL1 = (Y*L11).subs([(t1, (sudutbaru)*math.pi/180)])-(L1)
         deltaL2 = (Y*L22).subs([(t1, (sudutbaru)*math.pi/180)])-(L2)            
@@ -138,18 +145,18 @@ while i < 18:
         R22 = (Y*R22).subs([(t1, sudutbaru*math.pi/180)])
         R33 = (Y*R33).subs([(t1, sudutbaru*math.pi/180)])        
    
-        print('Delta L1 : ')
-        print(deltaL1+dL1)
-        print('Delta L2 : ')
-        print(deltaL2+dLtengah)
-        print('Delta L3 : ')
-        print(deltaL3+dL3)
         print('Delta R1 : ')
         print(deltaR1+dR1)
         print('Delta R2 : ')
         print(deltaR2+dRtengah)
         print('Delta R3 : ')
         print(deltaR3+dR3)
+        print('Delta L1 : ')
+        print(deltaL1+dL1)
+        print('Delta L2 : ')
+        print(deltaL2+dLtengah)
+        print('Delta L3 : ')
+        print(deltaL3+dL3)
 
     if mode == 'z':
         sudutbaru = float(input('sudut akhir: '))
@@ -169,19 +176,18 @@ while i < 18:
         R22 = (Z*R22).subs([(t1, sudutbaru*math.pi/180)])
         R33 = (Z*R33).subs([(t1, sudutbaru*math.pi/180)])        
    
-        print('Delta L1 : ')
-        print(deltaL1+dL1)
-        print('Delta L2 : ')
-        print(deltaL2+dLtengah)
-        print('Delta L3 : ')
-        print(deltaL3+dL3)
         print('Delta R1 : ')
         print(deltaR1+dR1)
         print('Delta R2 : ')
         print(deltaR2+dRtengah)
         print('Delta R3 : ')
         print(deltaR3+dR3)
-
+        print('Delta L1 : ')
+        print(deltaL1+dL1)
+        print('Delta L2 : ')
+        print(deltaL2+dLtengah)
+        print('Delta L3 : ')
+        print(deltaL3+dL3)
         
     if mode == 'r':
         sudutlamax = 0
