@@ -3,6 +3,7 @@
 #include <fstream>  
 #include <string>
 
+
 //  //  //  //   //  //  //  
 //untuk kaki tengah, sudut t1 dikurangi 45 derajat sebelum diinput ke servo
 //tapi untuk masuk forward kinematik, ditambah 45 derajat lagi
@@ -10,7 +11,6 @@
 
 using namespace std;
 
-double const a1 = 53; //113.58 - 57.70;
 double const T = 72; //60.00;//
 double const F = 59; // 57.70;//
 double const C = 30;
